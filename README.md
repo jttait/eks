@@ -2,6 +2,14 @@
 
 Create EKS cluster and deploy simple server
 
+## Prerequisites
+
+- Docker
+- Docker buildx plugin
+- AWS CLI
+- Terraform
+- Helm
+
 ## Create
 
 ./run.sh
