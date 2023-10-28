@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testserver
+  labels:
+    name: testserver
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      name: testserver
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        name: testserver
+    spec:
+      imagePullSecrets: []
+      securityContext: {}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext: {}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+          resources: {}
+      nodeSelector: {}
+      affinity: {}
+      tolerations: []

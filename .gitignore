@@ -1,0 +1,4 @@
+infrastructure/*.tfvars
+infrastructure/.terraform*
+terraform.tfstate*
+app/helm/values.yaml
